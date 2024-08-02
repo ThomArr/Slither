@@ -16,7 +16,7 @@ run (){
 
     echo "[LANCEMENT]..."
 
-    java -cp bin/ main/Main
+    java -cp bin/ client/MainClient
 
 }
 
