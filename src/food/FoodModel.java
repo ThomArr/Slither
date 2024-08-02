@@ -2,9 +2,9 @@ package food;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import main.MainModel;
-import utils.ColorTools;
-import utils.Vector2D;
+import server.MainServer;
+import tools.ColorTools;
+import tools.Vector2D;
 
 /**
  * Représente un modèle de nourriture dans le jeu.
@@ -37,10 +37,10 @@ public class FoodModel {
      * @param frameDimension Les dimensions du cadre de jeu.
      */
     public FoodModel(Dimension frameDimension) {
-        this.currentCoord = new Vector2D((double) MainModel.rand.nextInt(frameDimension.width),
-                (double) MainModel.rand.nextInt(frameDimension.height));
+        this.currentCoord = new Vector2D((double) MainServer.rand.nextInt(frameDimension.width),
+                (double) MainServer.rand.nextInt(frameDimension.height));
         this.color = ColorTools.generateRandomColor();
-        this.level = MainModel.rand.nextInt(3) + 1; // Le niveau est aléatoire entre 1 et 3
+        this.level = MainServer.rand.nextInt(3) + 1; // Le niveau est aléatoire entre 1 et 3
     }
 
     /**

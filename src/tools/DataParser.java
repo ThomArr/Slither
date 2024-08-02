@@ -57,7 +57,7 @@ public class DataParser {
             StringTokenizer tokenizer = new StringTokenizer(snakeObject, ",");
 
             try {
-                double coefMultSize = Double.parseDouble(tokenizer.nextToken());
+                int level = Integer.parseInt(tokenizer.nextToken());
                 Color color = new Color(Integer.parseInt(tokenizer.nextToken()));
                 Color borderColor = new Color(Integer.parseInt(tokenizer.nextToken()));
 
@@ -73,7 +73,7 @@ public class DataParser {
                     balls.add(new SnakeModel.Ball(x, y));
                 }
 
-                snakeModels.add(new SnakeModel(coefMultSize, color, borderColor, balls));
+                snakeModels.add(new SnakeModel(level, color, borderColor, balls));
             } catch (NumberFormatException e) {
                 System.err.println("Erreur de format de nombre dans les données du serpent : " + snakeObject);
                 e.printStackTrace();
@@ -101,7 +101,7 @@ public class DataParser {
             Color color = new Color(Integer.parseInt(tokenizer.nextToken()));
             int level = Integer.parseInt(tokenizer.nextToken());
 
-            foodModels.add(new FoodModel(new Vector2D(x, y), color, level));
+            foodModels.add(new FoodModel(x, y, color, level));
         }
     }
 
@@ -131,7 +131,7 @@ public class DataParser {
         StringBuilder formattedSnakeModels = new StringBuilder();
 
         for (SnakeModel snake : snakeModels) {
-            formattedSnakeModels.append(snake.getCoefMultSize()).append(",");
+            formattedSnakeModels.append(snake.getLevel()).append(",");
             formattedSnakeModels.append(snake.getColor().getRGB()).append(",");
             formattedSnakeModels.append(snake.getBorderColor().getRGB()).append(",");
 

@@ -1,7 +1,6 @@
 package tools;
 
 import java.awt.Color;
-import main.MainModel;
 import server.MainServer;
 
 /**

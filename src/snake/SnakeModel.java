@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import main.MainModel;
-import utils.Vector2D;
+import server.MainServer;
+import tools.Vector2D;
 
 /**
  * Modèle représentant un serpent dans le jeu.
@@ -19,7 +19,7 @@ public class SnakeModel {
     private Color color;
     private Color borderColor;
     private List<Ball> balls;
-    private double speed = 1;
+    private double speed;
     private boolean isDead;
     private Dimension frameDimension;
     private int level;
@@ -28,6 +28,7 @@ public class SnakeModel {
 
     /**
      * Constructeur pour créer un nouveau serpent.
+     * Utile pour le serveur.
      * 
      * @param initialSize    Nombre d'anneaux initiale du serpent.
      * @param startX         Coordonnée X de départ.
@@ -42,24 +43,25 @@ public class SnakeModel {
         this.id = counter++;
         this.color = color;
         this.borderColor = borderColor;
+        this.speed = 1;
         this.isDead = false;
         this.frameDimension = frameDimension;
-        level = 0;
+        this.level = 0;
 
         this.bot = bot;
         if (bot) {
-            int botX = MainModel.rand.nextInt(2);
+            int botX = MainServer.rand.nextInt(2);
             if (botX == 0) {
-                botX = MainModel.rand.nextInt(frameDimension.width) + 2 * frameDimension.width;
+                botX = MainServer.rand.nextInt(frameDimension.width) + 2 * frameDimension.width;
             } else {
-                botX = -MainModel.rand.nextInt(frameDimension.width) - frameDimension.width;
+                botX = -MainServer.rand.nextInt(frameDimension.width) - frameDimension.width;
 
             }
-            int botY = MainModel.rand.nextInt(2);
+            int botY = MainServer.rand.nextInt(2);
             if (botY == 0) {
-                botY = MainModel.rand.nextInt(frameDimension.height) + 2 * frameDimension.height;
+                botY = MainServer.rand.nextInt(frameDimension.height) + 2 * frameDimension.height;
             } else {
-                botY = -MainModel.rand.nextInt(frameDimension.height) - frameDimension.height;
+                botY = -MainServer.rand.nextInt(frameDimension.height) - frameDimension.height;
 
             }
             botTargetCoord = new Vector2D(botX, botY);
@@ -77,12 +79,31 @@ public class SnakeModel {
     }
 
     /**
+     * Constructeur pour créer un nouveau serpent.
+     * Utile pour le client.
+     * 
+     * @param initialSize    Nombre d'anneaux initiale du serpent.
+     * @param startX         Coordonnée X de départ.
+     * @param startY         Coordonnée Y de départ.
+     * @param color          Couleur du serpent.
+     * @param borderColor    Couleur de la bordure du serpent.
+     * @param bot            Indique si le serpent est contrôlé par un bot.
+     * @param frameDimension Dimensions du cadre de jeu.
+     */
+    public SnakeModel(int level, Color color, Color borderColor, List<Ball> balls) {
+        this.level = level;
+        this.color = color;
+        this.borderColor = borderColor;
+        this.balls = balls;
+    }
+
+    /**
      * Initialise la direction de la tête du serpent en début de partie.
      */
     private void initFirstDirection() {
         Ball head = balls.get(0);
-        head.setDirectorVector(speed, MainModel.rand.nextInt(frameDimension.width),
-                MainModel.rand.nextInt(frameDimension.height));
+        head.setDirectorVector(speed, MainServer.rand.nextInt(frameDimension.width),
+                MainServer.rand.nextInt(frameDimension.height));
     }
 
     /**
@@ -101,8 +122,8 @@ public class SnakeModel {
      */
     public void generateBotMove() {
         botTargetCoord.addVector(new Vector2D(
-                (MainModel.rand.nextInt(2) == 0 ? -1 : 1) * MainModel.rand.nextInt(frameDimension.width / 5),
-                (MainModel.rand.nextInt(2) == 0 ? -1 : 1) * MainModel.rand.nextInt(frameDimension.height / 5)));
+                (MainServer.rand.nextInt(2) == 0 ? -1 : 1) * MainServer.rand.nextInt(frameDimension.width / 5),
+                (MainServer.rand.nextInt(2) == 0 ? -1 : 1) * MainServer.rand.nextInt(frameDimension.height / 5)));
 
         if (3 * frameDimension.width < botTargetCoord.x) {
             botTargetCoord.subVector(new Vector2D(frameDimension.width / 5, 0));
@@ -244,6 +265,10 @@ public class SnakeModel {
 
     public Color getBorderColor() {
         return borderColor;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public boolean isBot() {
