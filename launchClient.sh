@@ -4,6 +4,10 @@ compile (){
 
     echo "[COMPILATION]..."
 
+    if [ ! -d "bin" ]; then
+        mkdir bin
+    fi
+
     find -name "*.java" > sources.txt
     javac -d bin @sources.txt
     rm sources.txt
