@@ -53,7 +53,7 @@ public class MainServer {
             }
 
             // Initialiser les bots
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 9; i++) {
                 Color color = ColorTools.generateRandomColor();
                 SnakeModel snakeModel = new SnakeModel(15, rand.nextInt(dimension.width),
                         rand.nextInt(dimension.height), color,

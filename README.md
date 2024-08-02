@@ -2,7 +2,7 @@
 
 ## Description
 
-Ce projet est une réplique du célèbre jeu **Slither.io**. Il vous permet de contrôler un serpent sur une carte avec 9 autres serpents contrôlés par des bots. L'objectif est de survivre le plus longtemps possible en mangeant de la nourriture et en évitant les collisions avec d'autres serpents.
+Ce projet est une réplique du célèbre jeu **Slither.io**. Il vous permet de contrôler autant de serpent que de client sur une carte avec 9 autres serpents contrôlés par des bots. L'objectif est de survivre le plus longtemps possible en mangeant de la nourriture et en évitant les collisions avec d'autres serpents.
 
 ## Prérequis
 
@@ -12,11 +12,19 @@ Ce projet est une réplique du célèbre jeu **Slither.io**. Il vous permet de c
 ## Exécution
 
 **Exécution directe via script :**
-- Assurez-vous que le script `launch.sh` a les permissions d'exécution (vous pouvez le faire avec `chmod +x launch.sh` si nécessaire).
-- Lancez le jeu en utilisant :
-    ```sh
-    sh launch.sh
-    ```
+- **Serveur :**
+    - Assurez-vous que le script `launchServer.sh` a les permissions d'exécution (vous pouvez le faire avec `chmod +x launchServer.sh` si nécessaire).
+    - Lancez le serveur en utilisant :
+      ```sh
+      sh launchServer.sh
+      ```
+  - **Client :**
+    - Assurez-vous que le script `launchClient.sh` a les permissions d'exécution (vous pouvez le faire avec `chmod +x launchClient.sh` si nécessaire).
+    - Lancez le client en utilisant :
+      ```sh
+      sh launchClient.sh
+      ```
+      
 ## Utilisation
 
 - **Contrôle du serpent :** Déplacez votre serpent en utilisant la souris.
