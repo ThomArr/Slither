@@ -1,4 +1,4 @@
-package utils;
+package tools;
 
 /**
  * Représente un vecteur dans un espace 2D avec des coordonnées x et y.

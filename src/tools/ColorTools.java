@@ -1,7 +1,8 @@
-package utils;
+package tools;
 
 import java.awt.Color;
 import main.MainModel;
+import server.MainServer;
 
 /**
  * Classe utilitaire pour les opérations sur les couleurs.
@@ -13,9 +14,9 @@ public class ColorTools {
      * @return une instance de {@link Color} représentant une couleur aléatoire.
      */
     public static Color generateRandomColor() {
-        int red = MainModel.rand.nextInt(256);
-        int green = MainModel.rand.nextInt(256);
-        int blue = MainModel.rand.nextInt(256);
+        int red = MainServer.rand.nextInt(256);
+        int green = MainServer.rand.nextInt(256);
+        int blue = MainServer.rand.nextInt(256);
         return new Color(red, green, blue);
     }
 
