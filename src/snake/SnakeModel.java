@@ -1,5 +1,6 @@
 package snake;
 
+import food.FoodModel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -208,6 +209,21 @@ public class SnakeModel {
             }
         }
         return false;
+    }
+
+    /**
+     * Vérifie si le serpent peut manger un modèle de nourriture donné.
+     * 
+     * @param foodModel Le modèle de nourriture à vérifier.
+     * @return true si le serpent peut manger la nourriture, sinon false.
+     */
+    public boolean canEat(FoodModel foodModel) {
+        Ball head = balls.get(0);
+        double diametreSnake = getDiametre();
+        double rayonSnake = diametreSnake / 2;
+        double rayonFood = foodModel.getDiametre() / 2;
+        return Math.sqrt(Math.pow(head.getX() - foodModel.getX(), 2)
+                + Math.pow(head.getY() - foodModel.getY(), 2)) < rayonSnake + rayonFood;
     }
 
     @Override
