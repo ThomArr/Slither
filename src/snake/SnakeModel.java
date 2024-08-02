@@ -7,15 +7,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Random;
+import main.MainModel;
 import utils.Vector2D;
 
 /**
  * Modèle représentant un serpent dans le jeu.
  */
 public class SnakeModel {
-    private final Random rand = new Random();
-
     private static int counter = 0;
     private int id;
     private Color color;
@@ -50,18 +48,18 @@ public class SnakeModel {
 
         this.bot = bot;
         if (bot) {
-            int botX = rand.nextInt(2);
+            int botX = MainModel.rand.nextInt(2);
             if (botX == 0) {
-                botX = rand.nextInt(frameDimension.width) + 2 * frameDimension.width;
+                botX = MainModel.rand.nextInt(frameDimension.width) + 2 * frameDimension.width;
             } else {
-                botX = -rand.nextInt(frameDimension.width) - frameDimension.width;
+                botX = -MainModel.rand.nextInt(frameDimension.width) - frameDimension.width;
 
             }
-            int botY = rand.nextInt(2);
+            int botY = MainModel.rand.nextInt(2);
             if (botY == 0) {
-                botY = rand.nextInt(frameDimension.height) + 2 * frameDimension.height;
+                botY = MainModel.rand.nextInt(frameDimension.height) + 2 * frameDimension.height;
             } else {
-                botY = -rand.nextInt(frameDimension.height) - frameDimension.height;
+                botY = -MainModel.rand.nextInt(frameDimension.height) - frameDimension.height;
 
             }
             botTargetCoord = new Vector2D(botX, botY);
@@ -83,8 +81,8 @@ public class SnakeModel {
      */
     private void initFirstDirection() {
         Ball head = balls.get(0);
-        head.setDirectorVector(speed, rand.nextInt(frameDimension.width),
-                rand.nextInt(frameDimension.height));
+        head.setDirectorVector(speed, MainModel.rand.nextInt(frameDimension.width),
+                MainModel.rand.nextInt(frameDimension.height));
     }
 
     /**
@@ -103,8 +101,8 @@ public class SnakeModel {
      */
     public void generateBotMove() {
         botTargetCoord.addVector(new Vector2D(
-                (rand.nextInt(2) == 0 ? -1 : 1) * rand.nextInt(frameDimension.width / 5),
-                (rand.nextInt(2) == 0 ? -1 : 1) * rand.nextInt(frameDimension.height / 5)));
+                (MainModel.rand.nextInt(2) == 0 ? -1 : 1) * MainModel.rand.nextInt(frameDimension.width / 5),
+                (MainModel.rand.nextInt(2) == 0 ? -1 : 1) * MainModel.rand.nextInt(frameDimension.height / 5)));
 
         if (3 * frameDimension.width < botTargetCoord.x) {
             botTargetCoord.subVector(new Vector2D(frameDimension.width / 5, 0));
